@@ -1,8 +1,7 @@
-import { useNavigate } from "react-router-dom";
+
 import { useState } from "react";
+import { Sidebar } from "./Sidebar";
 export const UserTable = () => {
-  const [open, setOpen] = useState(true);
-  const navigate = useNavigate();
   const users = [
     {
       name: "default",
@@ -16,29 +15,55 @@ export const UserTable = () => {
       mobile: "898988989",
       city: "sumepur",
     },
+    {
+      name: "default 1",
+      email: "myemail@gmail.com",
+      mobile: "898988989",
+      city: "sumepur",
+    },
+    {
+      name: "user 3",
+      email: "myemgdail@gmail.com",
+      mobile: "898988989",
+      city: "sumepur",
+    },
   ];
+
+  const [userData, setUserData] = useState(users);
+  const handleChange = (e) => {
+    e.preventDefault()
+    console.log("handlechange");
+    const searchQuery = e.target.value;
+    const filteredData = users.filter((users) =>
+      users.name.includes(searchQuery),
+    );
+
+    setUserData(filteredData || []);
+  };
+  console.log("handlechange");
   return (
-    <div style={{ display: "grid" }}>
+    <div style={{display:"flex",marginTop:"100px"}}>
+      {/* <Sidebar/> */}
       <h1>User Table</h1>
-      <table>
-        <tr>
-          <th>Name</th>
+      <div style={{display:"flex"}}>
+        <input placeholder="search" onChange={handleChange} />
+      </div>
+      <table mb="4" style={{border:"1px solid gray"}}>
+        <tr style={{border:"1px solid gray",padding:"10px"}}> 
+          <th >Name</th>
           <th>Email</th>
           <th>Mobile</th>
           <th>City</th>
         </tr>
-        <tbody>
-          {users.map((el, ind) => {
-            return (
-              <tr key={ind}>
-                <td>{el.name}</td>
-                <td>{el.email}</td>
-                <td>{el.mobile}</td>
-                <td>{el.city}</td>
-              </tr>
-            );
-          })}
-        </tbody>
+
+        {userData.map((user,i) => (
+          <tr key={i}>
+            <td style={{border:"1px solid gray",padding:"10px"}}>{user.name}</td>
+            <td style={{border:"1px solid gray",padding:"10px"}}>{user.email}</td>
+            <td style={{border:"1px solid gray",padding:"10px"}}>{user.mobile}</td>
+            <td style={{border:"1px solid gray",padding:"10px"}}>{user.city}</td>
+          </tr>
+        ))}
       </table>
     </div>
   );

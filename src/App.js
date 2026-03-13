@@ -26,9 +26,8 @@ function App() {
       mobile: "898988989",
       city: "sumepur",
     };
-    // getAllUsers()
-    // createNewUser(payload);
-    // deleteUser('3d9d1d36ce584aa082524634a92cf78e')
+    getAllUsers(payload);
+
   }, []);
 
   return (
@@ -38,6 +37,7 @@ function App() {
         <Route path="/users" element={<UserTable />} />
       </Routes>
       <Sidebar />
+      
     </div>
   );
 }
