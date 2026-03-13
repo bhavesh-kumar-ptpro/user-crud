@@ -131,6 +131,12 @@ export default function SignUp() {
           sx={{ mb: 2 }}
           value={form.password}
           onChange={handleChange}
+          error={form.password.length > 0 && form.password.length < 6}
+          helperText={
+            form.password.length > 0 && form.password.length < 6
+              ? "Password must be at least 6 characters"
+              : ""
+          }
         />
 
         <Button variant="contained" fullWidth onClick={handleSubmit}>
