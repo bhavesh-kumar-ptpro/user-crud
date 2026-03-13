@@ -1,19 +1,6 @@
 import { useEffect } from "react";
 import "./App.css";
-import {
-  Heading,
-  Table,
-  TableBody,
-  TableContainer,
-  Thead,
-  Tr,
-  Th,
-  Button,
-} from "@chakra-ui/react";
-import { hello } from "./functions";
-import { getAllUsers, createNewUser, deleteUser } from "./functions";
-import { ChakraProvider } from "@chakra-ui/react";
-import { Sidebar } from "./components/Sidebar";
+import { getAllUsers } from "./functions";
 import { Route, Routes, BrowserRouter } from "react-router-dom";
 import { Dashboard } from "./components/Dashboard";
 import { UserTable } from "./components/UserTable";
@@ -23,25 +10,22 @@ import "react-toastify/dist/ReactToastify.css";
 import SignUp from "./pages/SignUp";
 import { Login } from "./pages/Login";
 import { PrivateRoute } from "./PrivateRoute";
+
 function App() {
-  useEffect(() => {
-    const payload = {
-      name: "default",
-      email: "myemail@gmail.com",
-      mobile: "898988989",
-      city: "sumepur",
-    };
-    getAllUsers(payload);
-  }, []);
+
+  const isLoggedIn = localStorage.getItem("auth");
 
   return (
     <div className="App">
       <ToastContainer position="top-right" />
+
       <BrowserRouter>
-        <SidebarDrawer />
+
+        {/* Show drawer only when logged in */}
+        {isLoggedIn && <SidebarDrawer />}
+
         <Routes>
           <Route path="/signup" element={<SignUp />} />
-
           <Route path="/login" element={<Login />} />
 
           <Route
@@ -52,6 +36,7 @@ function App() {
               </PrivateRoute>
             }
           />
+
           <Route
             path="/users"
             element={
@@ -61,6 +46,7 @@ function App() {
             }
           />
         </Routes>
+
       </BrowserRouter>
     </div>
   );
