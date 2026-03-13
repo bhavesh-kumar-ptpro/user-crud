@@ -1,51 +1,47 @@
 import axios from "axios";
-export const hello = () => {
-  console.log("working");
-};
-// const BACKEND_URL = process.env.REACT_APP_BACKEND_URI;
-const BACKEND_URL = "https://crudcrud.com/api";
 
+const BACKEND_URL = "https://crudcrud.com/api/YOUR_API_KEY/users";
+
+// GET ALL USERS
 export const getAllUsers = async () => {
-  console.log("fetching", BACKEND_URL);
-
   try {
-    const { data } = await axios.get(`${BACKEND_URL}`);
-    console.log("data", data);
+    const response = await axios.get(BACKEND_URL);
+    return response.data;
   } catch (error) {
-    console.log(error.message);
+    console.error("Error fetching users:", error.message);
+    throw error;
   }
 };
 
+// CREATE USER
 export const createNewUser = async (payload) => {
-  console.log("fetching createNewUser");
-  const {
-    name = "default user",
-    email = "user@email.com",
-    mobile = "7887787887",
-    city = "Sumerpur",
-  } = payload;
   try {
-    const { data } = await axios.post(`${BACKEND_URL}`, payload);
-    console.log("createNewUser", data);
+    const response = await axios.post(BACKEND_URL, payload);
+    return response.data;
   } catch (error) {
-    console.log("error", error.message);
+    console.error("Error creating user:", error.message);
+    throw error;
   }
 };
 
-export const editUser = async (payload, id) => {
+// EDIT USER
+export const editUser = async (id, payload) => {
   try {
-    const { data } = await axios.put(`${BACKEND_URL}/${id}`, payload);
-    console.log("createNewUser", data);
+    const response = await axios.put(`${BACKEND_URL}/${id}`, payload);
+    return response.data;
   } catch (error) {
-    console.log(error.message);
+    console.error("Error updating user:", error.message);
+    throw error;
   }
 };
 
+// DELETE USER
 export const deleteUser = async (id) => {
   try {
-    const { data } = await axios.delete(`${BACKEND_URL}/${id}`);
-    console.log("createNewUser", data);
+    const response = await axios.delete(`${BACKEND_URL}/${id}`);
+    return response.data;
   } catch (error) {
-    console.log(error.message);
+    console.error("Error deleting user:", error.message);
+    throw error;
   }
 };
