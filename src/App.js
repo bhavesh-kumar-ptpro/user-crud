@@ -14,10 +14,15 @@ import { hello } from "./functions";
 import { getAllUsers, createNewUser, deleteUser } from "./functions";
 import { ChakraProvider } from "@chakra-ui/react";
 import { Sidebar } from "./components/Sidebar";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, BrowserRouter } from "react-router-dom";
 import { Dashboard } from "./components/Dashboard";
 import { UserTable } from "./components/UserTable";
-
+import { SidebarDrawer } from "./components/SidebarDrawer";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import SignUp from "./pages/SignUp";
+import { Login } from "./pages/Login";
+import { PrivateRoute } from "./PrivateRoute";
 function App() {
   useEffect(() => {
     const payload = {
@@ -27,17 +32,36 @@ function App() {
       city: "sumepur",
     };
     getAllUsers(payload);
-
   }, []);
 
   return (
     <div className="App">
-      <Routes>
-        <Route path="/" element={<Dashboard />} />
-        <Route path="/users" element={<UserTable />} />
-      </Routes>
-      <Sidebar />
-      
+      <ToastContainer position="top-right" />
+      <BrowserRouter>
+        <SidebarDrawer />
+        <Routes>
+          <Route path="/signup" element={<SignUp />} />
+
+          <Route path="/login" element={<Login />} />
+
+          <Route
+            path="/"
+            element={
+              <PrivateRoute>
+                <Dashboard />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/users"
+            element={
+              <PrivateRoute>
+                <UserTable />
+              </PrivateRoute>
+            }
+          />
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 }
