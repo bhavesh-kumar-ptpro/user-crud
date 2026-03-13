@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const BACKEND_URL = "https://crudcrud.com/api/d97bd4fca821490fb94153a847cb53d3/API_KEY/users";
+const BACKEND_URL = "https://crudcrud.com/api/d97bd4fca821490fb94153a847cb53d3/users";
 
 // GET ALL USERS
 export const getAllUsers = async () => {
