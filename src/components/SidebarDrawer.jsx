@@ -120,7 +120,7 @@ export const SidebarDrawer = () => {
       </Drawer>
 
       {/* Logout Dialog */}
-      <Dialog open={logoutDialog}>
+      <Dialog open={logoutDialog} maxWidth="sm" fullWidth>
         <DialogTitle>Logout</DialogTitle>
 
         <DialogContent>

@@ -1,4 +1,16 @@
-import { Box, Grid, Paper, Typography, Fab, Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions, Button } from "@mui/material";
+import {
+  Box,
+  Grid,
+  Paper,
+  Typography,
+  Fab,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogContentText,
+  DialogActions,
+  Button,
+} from "@mui/material";
 import PeopleIcon from "@mui/icons-material/People";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import DeleteIcon from "@mui/icons-material/Delete";
@@ -41,7 +53,7 @@ export const Dashboard = () => {
   const handleConfirmLogout = () => {
     localStorage.removeItem("auth");
     localStorage.removeItem("currentUser");
-    setOpenDialog(false)
+    setOpenDialog(false);
     navigate("/login");
   };
 
@@ -63,7 +75,12 @@ export const Dashboard = () => {
         Dashboard
       </Typography>
 
-      <Grid container spacing={3} justifyContent="center" sx={{ maxWidth: "900px", mt: 2 }}>
+      <Grid
+        container
+        spacing={3}
+        justifyContent="center"
+        sx={{ maxWidth: "900px", mt: 2 }}
+      >
         {stats.map((item, index) => (
           <Grid item xs={12} sm={6} md={3} key={index}>
             <Paper
@@ -107,7 +124,7 @@ export const Dashboard = () => {
       </Fab>
 
       {/* Logout Confirmation Dialog */}
-      <Dialog open={openDialog} onClose={handleCancel}>
+      <Dialog open={openDialog} onClose={handleCancel} maxWidth="sm" fullWidth>
         <DialogTitle>Logout</DialogTitle>
 
         <DialogContent>
