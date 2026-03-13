@@ -53,8 +53,8 @@ export const UserTable = () => {
       city: "Delhi",
     },
   ];
-
-  const [users, setUsers] = useState(initialUsers);
+const localStorageUser = JSON.parse(localStorage.getItem('users'))
+  const [users, setUsers] = useState(localStorageUser);
   const [search, setSearch] = useState("");
 
   const [page, setPage] = useState(0);
@@ -67,6 +67,8 @@ export const UserTable = () => {
   const filteredUsers = users.filter((user) =>
     user.name.toLowerCase().includes(search.toLowerCase()),
   );
+
+console.log('localStorageUser',localStorageUser);
 
   const handleSearch = (e) => {
     setSearch(e.target.value);
